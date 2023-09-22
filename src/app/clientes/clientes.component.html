@@ -1,0 +1,60 @@
+<h1> {{ 'CLIENTES CRUD' | uppercase }}</h1>
+<div class="principalContainer">
+    <div class="container">
+        <mat-selection-list #shoes [multiple]="false" (selectionChange)="seleccionado($event)">
+            <mat-list-option *ngFor="let art of valor" [value]="art.idCliente">
+                {{art.nombre | uppercase}} {{art.apellidos |uppercase}} 
+
+            </mat-list-option>
+            
+        </mat-selection-list>
+
+    </div>
+    <div class="container">
+
+        <form [formGroup]="miFormulario" class="containerForm">
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Escribe el Nombre" formControlName="nombre" [value]="datosCliente.nombre">
+                <span class="form-text" *ngIf="campoEsValido('nombre')">
+                    Llenar los campos requeridos </span>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Apellidos</mat-label>
+                <input matInput placeholder="Escribe el Apellidos" formControlName="apellidos"
+                    [value]="datosCliente.apellidos">
+                <span class="form-text" *ngIf="campoEsValido('apellidos')">
+                    Llenar los campos requeridos </span>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>RFC</mat-label>
+                <input matInput placeholder="Escribe el RFC" formControlName="rfc" [value]="datosCliente.rfc">
+                <span class="form-text" *ngIf="campoEsValido('rfc')">
+                    El campo debe de contener al menos 12 caracteres </span>
+            </mat-form-field>
+            <div class="btn-container">
+
+                <button type="submit" (click)="actualizar(datosCliente.idCliente)" mat-raised-button color="primary"
+                     *ngIf="datosCliente.idCliente != 0">
+                    Actualizar
+                </button>
+                <button type="submit" (click)="guardar()" mat-raised-button color="primary" 
+                    *ngIf="datosCliente.idCliente == 0">
+                    Guardar
+                </button>
+                <button type="submit" (click)="borrar(datosCliente.idCliente)" mat-raised-button color="primary" 
+                *ngIf="datosCliente.idCliente != 0">
+                    Borrar
+                </button>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>

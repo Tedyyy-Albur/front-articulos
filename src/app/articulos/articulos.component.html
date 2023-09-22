@@ -1,0 +1,63 @@
+<h1> {{ 'Articulos CRUD' | uppercase }}</h1>
+
+<div class="form-gird">
+    <h1>Agregar</h1>
+
+    <form [formGroup]="miFormulario" class="containerForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre del Articulo" formControlName="nombre" [value]="datosCliente.nombre">
+            <span class="form-text" *ngIf="campoEsValido('nombre')">
+                Llene los campos requeridos </span>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <input matInput placeholder="Descripción" formControlName="descripcion" [value]="datosCliente.descripcion">
+            <span class="form-text" *ngIf="campoEsValido('descripcion')">
+                Llene los campos requeridos </span>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" placeholder="Precio" formControlName="precio" [value]="datosCliente.precio">
+            <span class="form-text" *ngIf="campoEsValido('precio')">
+                Llene los campos requeridos </span>
+        </mat-form-field>
+        <div class="btn-container">
+
+            <button type="submit" (click)="actualizar(datosCliente.idArticulo)" mat-raised-button color="primary"
+                 *ngIf="datosCliente.idArticulo != 0">
+                Actualizar
+            </button>
+            <button type="submit" (click)="guardar()" mat-raised-button color="primary" 
+                *ngIf="datosCliente.idArticulo == 0">
+                Guardar
+            </button>
+            <button type="submit" (click)="borrar(datosCliente.idArticulo)" mat-raised-button color="primary" 
+            *ngIf="datosCliente.idArticulo != 0">
+                Borrar
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<div class="grid-cont">
+    <mat-card class="example-card" *ngFor="let item of articulos">
+        <mat-card-header>
+            <mat-card-title>{{item.nombre | uppercase}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{item.descripcion | uppercase}}</p>
+            <p>${{item.precio}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button [routerLink]="['/pedidos']" color="primary">Pedido</button>
+            <button mat-raised-button (click)="editar(item)" color="primary">Editar</button>
+            <button mat-raised-button (click)="borrar(item.idArticulo)" color="primary">Eliminar</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

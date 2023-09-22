@@ -1,0 +1,60 @@
+<h1> {{ 'Pedidos CRUD' | uppercase }}</h1>
+<div class="cont-main">
+
+    <div class="container">
+        <h2>{{'Selecciona un cliente' | uppercase}}</h2>
+        <mat-selection-list #shoes [multiple]="false" (selectionChange)="seleccionado($event)">
+            <mat-list-option *ngFor="let art of valor" [value]="art.idCliente">
+                {{art.nombre | uppercase}} {{art.apellidos |uppercase}}
+            </mat-list-option>
+        </mat-selection-list>
+
+    </div>
+
+    <form [formGroup]="miFormulario" class="containerForm">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <input matInput placeholder="Descripción" formControlName="descripcion">
+        </mat-form-field>
+        <span class="form-text" *ngIf="campoEsValido('descripcion')">
+            Llenar los campos requeridos </span>
+
+        <button type="submit" (click)="guardar()" mat-raised-button color="primary">
+            Guardar
+        </button>
+
+    </form>
+<div class="containerMain">
+    <div class="containerList">
+        <h2>{{'Selecciona un pedido' | uppercase}}</h2>
+        <mat-selection-list #shoes [multiple]="false" (selectionChange)="seleccionadoPedido($event)">
+            <mat-list-option *ngFor="let art of mostrarPedidos" [value]="art.idPedido">
+                {{art.idPedido}}- {{art.descripcion |uppercase}}
+            </mat-list-option>
+        </mat-selection-list>
+
+        <h2>{{'Selecciona el articulo' | uppercase}}</h2>
+        <mat-selection-list #shoes [multiple]="false" (selectionChange)="seleccionadoArticulo($event)" *ngIf="idPedido != 0">
+            <mat-list-option *ngFor="let art of articulos" [value]="art.idArticulo">
+                ${{art.precio}}- {{art.nombre |uppercase}}
+            </mat-list-option>
+        </mat-selection-list>
+        
+    </div>
+    <div class="containerList">
+        <form [formGroup]="guardarPartidaform" class="containerForm" *ngIf="idArticulo != 0">
+            <mat-form-field appearance="outline">
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" placeholder="Cantidad" formControlName="cantidad">
+            </mat-form-field>
+            <span class="form-text" *ngIf="campoEsValidoPartida('cantidad')">
+                El valor no puede ser 0 </span>
+        </form>
+       
+    </div>
+</div>
+<button type="submit" (click)="guardarPartidaPedido()" mat-raised-button color="primary">
+    Guardar-Imprimir Partida-Pedido
+</button>
+</div>
