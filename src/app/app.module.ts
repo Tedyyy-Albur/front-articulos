@@ -13,6 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -48,7 +49,9 @@ import { PartidaComponent } from './partida/partida.component';
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

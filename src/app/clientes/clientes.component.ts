@@ -4,6 +4,7 @@ import { ArticuloServiceService } from '../service/articulo-service.service';
 import { MatSelectionListChange } from '@angular/material/list';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Clientes } from '../interfaces/clientes';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clientes',
@@ -20,6 +21,7 @@ export class ClientesComponent {
     rfc: '',
   };
   state: boolean = false;
+  
 
   miFormulario: FormGroup =this.fb.group({
     nombre:[, [Validators.required, Validators.minLength(3)]],
@@ -98,11 +100,18 @@ export class ClientesComponent {
      })
   }
 
-  borrar(id: number){
+  borrar(datos: Clientes){
     
-    this.articuloService.borrarClientes(id).subscribe(resp => {
+    this.articuloService.borrarClientes(datos.idCliente).subscribe(resp => {
       if (resp.informacion.exito == 1) {
         window.location.reload()
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El Usuario '+ datos.nombre +' Tiene Pedidos',
+        })
+
       }
 
   })

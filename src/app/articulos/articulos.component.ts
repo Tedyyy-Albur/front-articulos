@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ArticuloServiceService } from '../service/articulo-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Articulos } from '../interfaces/articulos';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-articulos',
@@ -80,6 +81,12 @@ export class ArticulosComponent {
     this.articuloService.borrarArticulo(id).subscribe(resp => {
       if (resp.informacion.exito == 1) {
         window.location.reload()
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El articulo sigue en existencia.',
+        })
       }
     });
   

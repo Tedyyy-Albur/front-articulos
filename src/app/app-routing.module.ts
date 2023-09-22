@@ -14,7 +14,7 @@ const routes: Routes = [
       {path:'articulos', component: ArticulosComponent},
       {path:'pedidos', component: PedidosComponent},
       {path:'partida/:id', component: PartidaComponent},
-      {path:'**', redirectTo:'clientes'}
+      {path:'**', redirectTo:''}
     ]
   }
 ];

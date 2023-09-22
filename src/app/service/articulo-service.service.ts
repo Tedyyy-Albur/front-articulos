@@ -13,8 +13,8 @@ export class ArticuloServiceService {
 
   constructor(private http: HttpClient) { }
 
-  //private apiUrl = 'http://localhost:8000/api/';
-  private apiUrl = 'https://articulos-crud-production.up.railway.app/api/';
+  private apiUrl = 'http://localhost:8000/api/';
+  //private apiUrl = 'https://articulos-crud-production.up.railway.app/api/';
   /**clientes */
   obtenerClientes() {
     return this.http.get<any>(this.apiUrl+'clientes/obtener');
